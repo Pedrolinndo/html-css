@@ -19,24 +19,42 @@
             padding: 10px;
         }
 
+        tbody td:hover {
+           background-color: #5f5f5f;
+           color: rgb(225, 225, 225);
+           transition-duration: 0.85s;
+        }
+
+        tbody > tr:nth-child(2n) {
+            background-color: lightgrey;
+        }
+
         thead, tfoot{
             background-color: #4b4b4b;
             color: white;
+        }
+
+        caption {
+            background-color: gainsboro;
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 10px;
         }
     </style>
 </head>
 <body>
     <h1>Uso de Tabelas Graaaandes</h1>
     <table>
+        <caption>População das Unidades Federativas do Brasil:</caption>
         <thead>
             <tr>
-                <th>Posição:</th>
+                <th scope="col">Posição:</th>
 
-                <th>Estado:</th>
+                <th scope="col">Estado:</th>
 
-                <th>População:</th>
+                <th scope="col">População:</th>
 
-                <th>% Da Pop. Total</th>
+                <th scope="col">% Da Pop. Total</th>
             </tr>
         </thead>
 
