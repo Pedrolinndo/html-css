@@ -47,3 +47,22 @@
       margin: 4px 0;
       text-align: left;
     }
+
+    
+    footer {
+      background: #222;
+      color: #eee;
+      padding: 15px;
+      text-align: center;
+      font-size: 14px;
+      border-top: 3px solid #0066cc;
+    }
+
+    footer a {
+      color: #66ccff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
