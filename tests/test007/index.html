@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela Touch</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <h1>Touch Colors Chart</h1>
+
+    <div style="margin-bottom: 20px;">
+    <select id="filtro">
+        <option value="have">Cores que tenho</option>
+        <option value="notHave">Cores que não tenho</option>
+        <option value="nome">Por nome</option>
+        <option value="cor">Por cor (HEXADECIMAL)</option>
+        <option value="numero">Por número</option>
+    </select>
+
+    <input type="text" id="pesquisa" placeholder="Digite para pesquisar..." style="display:none;">
+</div>
+
+    <table>
+        <caption>As Cores:</caption>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cor</th>
+                <th>Número</th>
+                <th>Hexadecimal</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+             <td>ColorLess Blender</td>
+             <td style="background-color: #ffffff;"></td>
+             <td>0</td>
+             <td>#ffffff</td>
+           </tr>
+
+           <tr>
+             <td>Wine Red</td>
+             <td style="background-color: #653b3b;"></td>
+             <td>1</td>
+             <td>#653b3b</td>
+           </tr>
+
+           <tr>
+            <td>Old Red</td>
+            <td style="background-color: #563232;"></td>
+            <td>2</td>
+            <td>#563232</td>
+           </tr>
+
+           <tr>
+            <td>Rose Red</td>
+            <td style="background-color: #b93751;"></td>
+            <td>3</td>
+            <td>#b93751</td>
+           </tr>
+
+           <tr>
+            <td>Vivid Red</td>
+            <td style="background-color: #c23232;"></td>
+            <td>4</td>
+            <td>#c23232</td>
+           </tr>
+
+           <tr>
+            <td>Cherry Pink</td>
+            <td style="background-color: #ff0044;"></td>
+            <td>5</td>
+            <td>#ff0044</td>
+           </tr>
+
+           <tr>
+            <td>Vivid Pink</td>
+            <td style="background-color: #e7478b;"></td>
+            <td>6</td>
+            <td>#e7478b</td>
+           </tr>
+
+           <tr>
+            <td>Cosmos</td>
+            <td style="background-color: #ff9cb0;"></td>
+            <td>7</td>
+            <td>#ff9cb0</td>
+           </tr>
+
+           <tr>
+            <td>Rose Pink</td>
+            <td style="background-color: #ff65a3;"></td>
+            <td>8</td>
+            <td>#ff65a3</td>
+           </tr>
+
+           <tr>
+            <td>Pale Pink</td>
+            <td style="background-color: #f8a8d0;"></td>
+            <td>9</td>
+            <td>#f8a8d0</td>
+           </tr>
+
+           <tr>
+            <td>Deep Red</td>
+            <td style="background-color: #ba1616;"></td>
+            <td>10</td>
+            <td>#ba1616</td>
+           </tr>
+
+           <tr>
+            <td>Carmine</td>
+            <td style="background-color: #b60024;"></td>
+            <td>11</td>
+            <td>#b60024</td>
+           </tr>
+
+           <tr>
+            <td>Coral Red</td>
+            <td style="background-color: #f31e49;"></td>
+            <td>12</td>
+           </tr>
+
+           <tr>
+            <td>Scarlet</td>
+            <td style="background-color: #b71535;"></td>
+            <td>13</td>
+           </tr>
+
+           <tr>
+            <td>Vermilion</td>
+            <td style="background-color: #ff4469;"></td>
+            <td>14</td>
+           </tr>
+
+           <tr>
+            <td>Geranium</td>
+            <td style="background-color: #de0631;"></td>
+            <td>15</td>
+           </tr>
+
+           <tr>
+            <td>Coral Pink</td>
+            <td style="background-color: #e54b6a;"></td>
+            <td>16</td>
+           </tr>
+
+           <tr>
+            <td>Pastel Red</td>
+            <td style="background-color: #ff746c;"></td>
+            <td>17</td>
+           </tr>
+
+           <tr>
+            <td>Peach</td>
+            <td style="background-color: #cb99a3;"></td>
+            <td>18</td>
+           </tr>
+
+           <tr>
+            <td>Chenin</td>
+            <td style="background-color: #dfc068;"></td>
+            <td>20</td>
+           </tr>
+
+           <tr>
+            <td>Terra Cotta</td>
+            <td style="background-color: #d95006;"></td>
+            <td>21</td>
+           </tr>
+
+           <tr>
+            <td>French Vermilion</td>
+            <td style="background-color: #cd1f00;"></td>
+            <td>22</td>
+           </tr>
+
+           <tr>
+            <td>Orange</td>
+            <td style="background-color: #ff5900;"></td>
+            <td>23</td>
+           </tr>
+
+           <tr>
+            <td>Marigold</td>
+            <td style="background-color: #eaa221;"></td>
+            <td>24</td>
+           </tr>
+
+           <tr>
+            <td>Salmon Pink</td>
+            <td style="background-color: #ff91a4;"></td>
+            <td>25</td>
+           </tr>
+
+           <tr>
+            <td>Pastel Peach</td>
+            <td style="background-color: #fdffcd;"></td>
+            <td>26</td>
+           </tr>
+
+           <tr>
+            <td>Powder Pink</td>
+            <td style="background-color: #eedfc7;"></td>
+            <td>27</td>
+           </tr>
+
+           <tr>
+            <td>Fruit Pink</td>
+            <td style="background-color: #e9c5c5;"></td>
+            <td>28</td>
+           </tr>
+
+           <tr>
+            <td>Barely Beige</td>
+            <td style="background-color: #eee3ba;"></td>
+            <td>29</td>
+           </tr>
+
+           <tr>
+            <td>Dark Yellow</td>
+            <td style="background-color: #BA8E23;"></td>
+            <td>31</td>
+           </tr>
+
+           <tr>
+            <td>Deep Yellow </td>
+            <td style="background-color: #ad6916;"></td>
+            <td>32</td>
+           </tr>
+
+           <tr>
+            <td>Melon Yellow</td>
+            <td style="background-color: #efd406";></td>
+            <td>33</td>
+           </tr>
+
+           <tr>
+            <td>Yellow</td>
+            <td style="background-color: yellow;"></td>
+            <td>34</td>
+           </tr>
+
+           <tr>
+            <td>Lemon Yellow</td>
+            <td style="background-color: #f6dd3e;"></td>
+            <td>35</td>
+           </tr>
+
+           <tr>
+            <td>Cream</td>
+            <td style="background-color: #fff48d;"></td>
+            <td>36</td>
+           </tr>
+
+           <tr>
+            <td>Pastel Yellow</td>
+            <td style="background-color: #FFFF67;"></td>
+            <td>37</td>
+           </tr>
+
+           <tr>
+            <td>Pale Yellow</td>
+            <td style="background-color: #fffdcb;"></td>
+            <td>38</td>
+           </tr>
+
+           <tr>
+            <td>Olive Green</td>
+            <td style="background-color: #808000;"></td>
+            <td>41</td>
+           </tr>
+
+           <tr>
+            <td>Bronze Green</td>
+            <td style="background-color: #68663D;"></td>
+            <td>42</td>
+           </tr>
+
+           <tr>
+            <td>Deep Olive Green</td>
+            <td style="background-color: #575700;"></td>
+            <td>43</td>
+           </tr>
+
+           <tr>
+            <td>Fresh Yellow</td>
+            <td style="background-color: #FCD000;"></td>
+            <td>44</td>
+           </tr>
+
+           <tr>
+            <td>Canaria Yellow</td>
+            <td style="background-color: #FDF63D;"></td>
+            <td>45</td>
+           </tr>
+
+           <tr>
+            <td>Vivid Green</td>
+            <td style="background-color: #1EA207;"></td>
+            <td>46</td>
+           </tr>
+
+           <tr>
+            <td>Grass Green</td>
+            <td style="background-color: #00de00;"></td>
+            <td>47</td>
+           </tr>
+
+           <tr>
+            <td>Yellow Green</td>
+            <td style="background-color: #aeff00"></td>
+            <td>48</td>
+           </tr>
+
+           <tr>
+            <td>Pastel Green</td>
+            <td style="background-color: #99fb5c;"></td>
+            <td>49</td>
+           </tr>
+
+           <tr>
+            <td>Forest Green</td>
+            <td style="background-color: #197a65;"></td>
+            <td>50</td>
+           </tr>
+
+           <tr>
+            <td>Dark Green</td>
+            <td style="background-color: darkgreen;"></td>
+            <td>51</td>
+           </tr>
+
+           <tr>
+            <td>Deep Green</td>
+            <td style="background-color: #1e6f21;"></td>
+            <td>52</td>
+           </tr>
+           
+           <tr>
+            <td>Turquoise Green</td>
+            <td style="background-color: #08926B;"></td>
+            <td>53</td>
+           </tr>
+
+           <tr>
+            <td>Viridian</td>
+            <td style="background-color: #005043;"></td>
+            <td>54</td>
+           </tr>
+
+           <tr>
+            <td>Emerald Green</td>
+            <td style="background-color: #046F06;"></td>
+            <td>55</td>
+           </tr>
+
+           <tr>
+            <td>Mint Green</td>
+            <td style="background-color: #5aff70";></td>
+            <td>56</td>
+           </tr>
+
+           <tr>
+            <td>Turquoise Green Light</td>
+            <td style="background-color: #06C2A1;"></td>
+            <td>57</td>
+           </tr>
+
+           <tr>
+            <td>Mint Green Light</td>
+            <td style="background-color: #61dfb7";></td>
+            <td>58</td>
+           </tr>
+
+           <tr>
+            <td>Pale Green</td>
+            <td style="background-color: #1dea21;"></td>
+            <td>59</td>
+           </tr>
+
+           <tr>
+            <td>Peacock Green</td>
+            <td style="background-color: #06A8B1;"></td>
+            <td>61</td>
+           </tr>
+
+           <tr>
+            <td>Marine Blue</td>
+            <td style="background-color: #397EA2;"></td>
+            <td>62</td>
+           </tr>
+
+           <tr>
+            <td>Cerulean Blue</td>
+            <td style="background-color: #0398e8;"></td>
+            <td>63</td>
+           </tr>
+
+           <tr>
+            <td>Indian Blue</td>
+            <td style="background-color: #1878ac;"></td>
+            <td>64</td>
+           </tr>
+
+           <tr>
+            <td>Ice Blue</td>
+            <td style="background-color: #3587BB;"></td>
+            <td>65</td>
+           </tr>
+
+           <tr>
+            <td>Baby Blue</td>
+            <td style="background-color: #308EF4;"></td>
+            <td>66</td>
+           </tr>
+
+           <tr>
+            <td>Pastel Blue</td>
+            <td style="background-color: #63f7ff;"></td>
+            <td>67</td>
+           </tr>
+
+           <tr>
+            <td>Turquoise Blue</td>
+            <td style="background-color: #00F7E7;"></td>
+            <td>68</td>
+           </tr>
+
+           <tr>
+            <td>Prussian Blue</td>
+            <td style="background-color: #003872;"></td>
+            <td>69</td>
+           </tr>
+
+           <tr>
+            <td>Royal Blue</td>
+            <td style="background-color: blue;"></td>
+            <td>70</td>
+           </tr>
+
+           <tr>
+            <td>Cobalt Blue</td>
+            <td style="background-color: #1a45c7;"></td>
+            <td>71</td>
+           </tr>
+
+            <tr>
+            <td>Napoleon Blue</td>
+            <td style="background-color: #1c388b;"></td>
+            <td>72</td>
+           </tr>
+
+           <tr>
+            <td>Ultra Marine</td>
+            <td style="background-color: #0b35cd;"></td>
+            <td>73</td>
+           </tr>
+
+           <tr>
+            <td>Briliant Blue</td>
+            <td style="background-color: #286CB5;"></td>
+            <td>74</td>
+           </tr>
+
+           <tr>
+            <td>Dark Blue Light</td>
+            <td style="background-color: #D6C5FE;"></td>
+            <td>75</td>
+           </tr>
+
+           <tr>
+            <td>Sky Blue</td>
+            <td style="background-color: #88c4ff;"></td>
+            <td>76</td>
+           </tr>
+
+           <tr>
+            <td>Pale Blue</td>
+            <td style="background-color: #b2fff1;"></td>
+            <td>77</td>
+           </tr>
+           
+           <tr>
+            <td>Grey Lilac</td>
+            <td style="background-color: #9997A5;"></td>
+            <td>79</td>
+           </tr>
+
+           <tr>
+            <td>Deep Violet</td>
+            <td style="background-color: #300066;"></td>
+            <td>81</td>
+           </tr>
+
+           <tr>
+            <td>Light Violet</td>
+            <td style="background-color: #650b92;"></td>
+            <td>82</td>
+           </tr>
+
+           <tr>
+            <td>Lavander</td>
+            <td style="background-color: #7C37B4;"></td>
+            <td>83</td>
+           </tr>
+
+           <tr>
+            <td>Pastel Violet</td>
+            <td style="background-color: #D6B6FF;"></td>
+            <td>84</td>
+           </tr>
+
+           <tr>
+            <td>Vivid Purple</td>
+            <td style="background-color: #8000c0;"></td>
+            <td>85</td>
+           </tr>
+
+           <tr>
+            <td>Vivid Reddish Purple</td>
+            <td style="background-color: #ED07CB;"></td>
+            <td>86</td>
+           </tr>
+
+           <tr>
+            <td>Azalea Purple</td>
+            <td style="background-color: #9d0e61;"></td>
+            <td>87</td>
+           </tr>
+
+           <tr>
+            <td>Purple Grey</td>
+            <td style="background-color: #F8AAFD;"></td>
+            <td>88</td>
+           </tr>
+
+           <tr>
+            <td>Pale Purple</td>
+            <td style="background-color: #e375b9;"></td>
+            <td>89</td>
+           </tr>
+
+           <tr>
+            <td>Natural Oak</td>
+            <td style="background-color: #2C2924;"></td>
+            <td>91</td>
+           </tr>
+
+           <tr>
+            <td>Chocolate</td>
+            <td style="background-color: #1F0000;"></td>
+            <td>92</td>
+           </tr>
+
+           <tr>
+            <td>Burnt Orange</td>
+            <td style="background-color: #5e341e;"></td>
+            <td>93</td>
+           </tr>
+
+           <tr>
+            <td>Brick Brown</td>
+            <td style="background-color: brown;"></td>
+            <td>94</td>
+           </tr>
+
+           <tr>
+            <td>Burnt Sienna</td>
+            <td style="background-color: #B06439;"></td>
+            <td>95</td>
+           </tr>
+
+           <tr>
+            <td>Mahogany</td>
+            <td style="background-color: #7B302A;"></td>
+            <td>96</td>
+           </tr>
+
+           <tr>
+            <td>Rose Beige</td>
+            <td style="background-color: #d19164;"></td>
+            <td>97</td>
+           </tr>
+
+           <tr>
+            <td>ChestNut Brown</td>
+            <td style="background-color: #5A3D35;"></td>
+            <td>98</td>
+           </tr>
+
+           <tr>
+            <td>Bronze</td>
+            <td style="background-color: #8C6B42;"></td>
+            <td>99</td>
+           </tr>
+
+           <tr>
+            <td>Walnut</td>
+            <td style="background-color: #8e6723;"></td>
+            <td>100</td>
+           </tr>
+
+           <tr>
+            <td>Yellow Ochre</td>
+            <td style="background-color: #CC7722;"></td>
+            <td>101</td>
+           </tr>
+
+           <tr>
+            <td>Raw Umber</td>
+            <td style="background-color: #a3683f;"></td>
+            <td>102</td>
+           </tr>
+
+           <tr>
+            <td>Potato Brown</td>
+            <td style="background-color: #e49440;"></td>
+            <td>103</td>
+           </tr>
+
+           <tr>
+            <td>Brown Gray</td>
+            <td style="background-color: #c49f31;"></td>
+            <td>104</td>
+           </tr>
+           
+           <tr>
+            <td>Sand</td>
+            <td style="background-color: #FEE2A6;"></td>
+            <td>107</td>
+           </tr>
+
+           <tr>
+            <td>Pearl White</td>
+            <td style="background-color: #FCF7D1;"></td>
+            <td>109</td>
+           </tr>
+
+           <tr>
+            <td>Brown</td>
+            <td style="background-color: #832100;"></td>
+            <td>111</td>
+           </tr>
+
+           <tr>
+            <td>Leather Brown</td>
+            <td style="background-color: #994628;"></td>
+            <td>112</td>
+           </tr>
+
+           <tr>
+            <td>Peanut</td>
+            <td style="background-color: #F5D59A;"></td>
+            <td>113</td>
+           </tr>
+
+           <tr>
+            <td>Pale Camel</td>
+            <td style="background-color: #F9C985;"></td>
+            <td>114</td>
+           </tr>
+
+           <tr>
+            <td>Flax</td>
+            <td style="background-color: #DBC99A;"></td>
+            <td>115</td>
+           </tr>
+
+           <tr>
+            <td>Clay</td>
+            <td style="background-color: #9f7d41;"></td>
+            <td>116</td>
+           </tr>
+
+           <tr>
+            <td>Black</td>
+            <td style="background-color: #000000;"></td>
+            <td>120</td>
+           </tr>
+
+           <tr>
+            <td>Fluorescent Coral Red</td>
+            <td style="background-color: #ff5675;"></td>
+            <td>121</td>
+           </tr>
+
+           <tr>
+            <td>Fluorescent Orange</td>
+            <td style="background-color: rgb(246, 177, 51);"></td>
+            <td>122</td>
+           </tr>
+
+           <tr>
+            <td>Fluorescent Yellow</td>
+            <td style="background-color: rgb(254, 254, 7);"></td>
+            <td>123</td>
+           </tr>
+
+           <tr>
+            <td>Fluorescent Green</td>
+            <td style="background-color: #79fc1c;"></td>
+            <td>124</td>
+           </tr>
+
+           <tr>
+            <td>Fluorescent Rose</td>
+            <td style="background-color: #FE6AD8;"></td>
+            <td>125</td>
+           </tr>
+
+           <tr>
+            <td>Fluorescent Pink</td>
+            <td style="background-color: #FD6EEF;"></td>
+            <td>126</td>
+           </tr>
+
+           <tr>
+            <td>Skin White</td>
+            <td style="background-color: #fff0da;"></td>
+            <td>131</td>
+           </tr>
+
+           <tr>
+            <td>Milky White</td>
+            <td style="background-color: #FEF9E2;"></td>
+            <td>132</td>
+           </tr>
+
+           <tr>
+            <td>Baby Skin Pink</td>
+            <td style="background-color: #f8f0c9;"></td>
+            <td>133</td>
+           </tr>
+
+            <tr>
+            <td>Raw Silk</td>
+            <td style="background-color: #fff0a8;"></td>
+            <td>134</td>
+           </tr>
+
+           <tr>
+            <td>Pale Cherry Pink</td>
+            <td style="background-color: #ffd0dd;"></td>
+            <td>135</td>
+           </tr>
+
+           <tr>
+            <td>Blush</td>
+            <td style="background-color: #FEE3DF;"></td>
+            <td>136</td>
+           </tr>
+
+           <tr>
+             <td>Medium Pink</td>
+             <td style="background-color: pink;"></td>
+             <td>137</td>
+           </tr>
+
+           <tr>
+            <td>Light Pink</td>
+            <td style="background-color: #ffdfea;"></td>
+            <td>138</td>
+           </tr>
+
+           <tr>
+            <td>Flesh</td>
+            <td style="background-color: #FFE0D5;"></td>
+            <td>139</td>
+           </tr>
+
+           <tr>
+            <td>Light Orange</td>
+            <td style="background-color: #fdbaa6;"></td>
+            <td>140</td>
+           </tr>
+
+           <tr>
+            <td>ButterCup Yellow</td>
+            <td style="background-color: #FCE9AF;"></td>
+            <td>141</td>
+           </tr>
+
+            <tr>
+            <td>Pale Cream</td>
+            <td style="background-color: #fffbda;"></td>
+            <td>142</td>
+           </tr>
+
+           <tr>
+            <td>Mint Blue</td>
+            <td style="background-color: #B1EFE0;"></td>
+            <td>143</td>
+           </tr>
+
+           <tr>
+            <td>Pale Baby Blue</td>
+            <td style="background-color: #d1e7ff;"></td>
+            <td>144</td>
+           </tr>
+
+           <tr>
+            <td>Pale Lavander</td>
+            <td style="background-color: #ebd4ff;"></td>
+            <td>145</td>
+           </tr>
+
+           <tr>
+            <td>Mauve Shadow</td>
+            <td style="background-color: #e2edf3;"></td>
+            <td>146</td>
+           </tr>
+
+           <tr>
+            <td>Pale Lilac</td>
+            <td style="background-color: #E4CBFF;"></td>
+            <td>147</td>
+           </tr>
+
+           <tr>
+            <td>Barleyy Beige</td>
+            <td style="background-color: #ae9342;"></td>
+            <td>152</td>
+           </tr>
+
+           <tr>
+            <td>Light Suntan</td>
+            <td style="background-color: #e2b6a5;"></td>
+            <td>153</td>
+           </tr>
+
+            <tr>
+            <td>Dark Suntan</td>
+            <td style="background-color: #d8957a;"></td>
+            <td>154</td>
+           </tr>
+
+           <tr>
+            <td>Reddish Brass</td>
+            <td style="background-color: #865a4c;"></td>
+            <td>155</td>
+           </tr>
+
+           <tr>
+            <td>Green Brice</td>
+            <td style="background-color: #FEFAE1;"></td>
+            <td>163</td>
+           </tr>
+
+           <tr>
+            <td>Anise</td>
+            <td style="background-color: #FDF9CA;"></td>
+            <td>164</td>
+           </tr>
+
+           <tr>
+            <td>Mignonette</td>
+            <td style="background-color: #d9ebb8;"></td>
+            <td>166</td>
+           </tr>
+
+           <tr>
+            <td>Pale Green Light</td>
+            <td style="background-color: #E5F4C1;"></td>
+            <td>167</td>
+           </tr>
+
+           <tr>
+            <td>Putty</td>
+            <td style="background-color: #f7f0d8;"></td>
+            <td>169</td>
+           </tr>
+
+           <tr>
+            <td>Jade Green</td>
+            <td style="background-color: #DCFDD5;"></td>
+            <td>171</td>
+           </tr>
+
+           <tr>
+            <td>Spectrum Green</td>
+            <td style="background-color: #F8F9D9;"></td>
+            <td>172</td>
+           </tr>
+
+           <tr>
+            <td>Dim Green</td>
+            <td style="background-color: #ECF4E3;"></td>
+            <td>173</td>
+           </tr>
+
+           <tr>
+            <td>Spring Dim Green</td>
+            <td style="background-color: #d3eab7;"></td>
+            <td>174</td>
+           </tr>
+
+           <tr>
+            <td>Lime Green</td>
+            <td style="background-color: #96f998;"></td>
+            <td>175</td>
+           </tr>
+
+           <tr>
+            <td>Cool Shadow</td>
+            <td style="background-color: #F4F3EE;"></td>
+            <td>178</td>
+           </tr>
+
+           <tr>
+            <td>Aqua Mint</td>
+            <td style="background-color: #baffe7;"></td>
+            <td>179</td>
+           </tr>
+
+           <tr>
+            <td>Frost Blue</td>
+            <td style="background-color: #FEFBF6;"></td>
+            <td>182</td>
+           </tr>
+
+           <tr>
+            <td>Phthalo Blue</td>
+            <td style="background-color: #C0DAFF;"></td>
+            <td>183</td>
+           </tr>
+
+           <tr>
+            <td>Pale Blue Light</td>
+            <td style="background-color: #E8F2F6;"></td>
+            <td>185</td>
+           </tr>
+
+           <tr>
+            <td>Pale Pink Light</td>
+            <td style="background-color: #fff3f9;"></td>
+            <td>196</td>
+           </tr>
+
+           <tr>
+            <td>Tender Pink</td>
+            <td style="background-color: #ff9fc7;"></td>
+            <td>198</td>
+           </tr>
+
+           <tr>
+            <td>Tiger Lily</td>
+            <td style="background-color: #FA5109;"></td>
+            <td>211</td>
+           </tr>
+
+           <tr>
+            <td>Primary Yellow</td>
+            <td style="background-color: #FDED03;"></td>
+            <td>221</td>
+           </tr>
+
+           <tr>
+            <td>Golden Yellow</td>
+            <td style="background-color: #deb606;"></td>
+            <td>222</td>
+           </tr>
+
+           <tr>
+            <td>Straw Yellow</td>
+            <td style="background-color: #D7B575;"></td>
+            <td>223</td>
+           </tr>
+
+           <tr>
+            <td>Olive Pale</td>
+            <td style="background-color: #CFB92E;"></td>
+            <td>224</td>
+           </tr>
+
+           <tr>
+            <td>Olive Green Dark</td>
+            <td style="background-color: #615e40;"></td>
+            <td>225</td>
+           </tr>
+
+           <tr>
+            <td>SeaWeed Green</td>
+            <td style="background-color: #758143;"></td>
+            <td>231</td>
+           </tr>
+
+           <tr>
+            <td>Grayish Green Pale</td>
+            <td style="background-color: #D0D0A3;"></td>
+            <td>232</td>
+           </tr>
+
+           <tr>
+            <td>Grayish Olive</td>
+            <td style="background-color: #9AA968;"></td>
+            <td>233</td>
+           </tr>
+
+           <tr>
+            <td>Leaf Green</td>
+            <td style="background-color: #B5DC0B;"></td>
+            <td>234</td>
+           </tr>
+
+           <tr>
+            <td>Sap Green</td>
+            <td style="background-color: #768F3A;"></td>
+            <td>235</td>
+           </tr>
+
+           <tr>
+            <td>Spring Green</td>
+            <td style="background-color: #BEEF30;"></td>
+            <td>236</td>
+           </tr>
+
+           <tr>
+            <td>Willow Green</td>
+            <td style="background-color: #A8B96A;"></td>
+            <td>237</td>
+           </tr>
+
+           <tr>
+            <td>Grayish Green Deep</td>
+            <td style="background-color: #6A7A61;"></td>
+            <td>241</td>
+           </tr>
+
+           <tr>
+            <td>Cobalt Green Pale</td>
+            <td style="background-color: #91C96B;"></td>
+            <td>242</td>
+           </tr>
+
+           <tr>
+            <td>Green Deep</td>
+            <td style="background-color: #099746;"></td>
+            <td>243</td>
+           </tr>
+
+           <tr>
+            <td>Verona Blue</td>
+            <td style="background-color: #29B0B4;"></td>
+            <td>251</td>
+           </tr>
+
+           <tr>
+            <td>Primary Cyan</td>
+            <td style="background-color: #0280E2;"></td>
+            <td>261</td>
+           </tr>
+
+           <tr>
+            <td>Cerulean Blue Light</td>
+            <td style="background-color: #94d1ff;"></td>
+            <td>262</td>
+           </tr>
+
+           <tr>
+            <td>Peacock Blue</td>
+            <td style="background-color: #02A5FB;"></td>
+            <td>263</td>
+           </tr>
+
+           <tr>
+            <td>Light Blue</td>
+            <td style="background-color: lightblue;"></td>
+            <td>271</td>
+           </tr>
+
+           <tr>
+            <td>Grayish Blue Pale</td>
+            <td style="background-color: #B2C9E9;"></td>
+            <td>272</td>
+           </tr>
+
+           <tr>
+            <td>Blue Berry</td>
+            <td style="background-color: #7B81DB;"></td>
+            <td>273</td>
+           </tr>
+
+           <tr>
+            <td>Violet Dark</td>
+            <td style="background-color: #5A4D9D;"></td>
+            <td>274</td>
+           </tr>
+
+           <tr>
+            <td>Violet</td>
+            <td style="background-color: violet;"></td>
+            <td>281</td>
+           </tr>
+
+           <tr>
+            <td>Peony Purple</td>
+            <td style="background-color: #C75EB3;"></td>
+            <td>282</td>
+           </tr>
+
+           <tr>
+            <td>Purple Deep</td>
+            <td style="background-color: #764767;"></td>
+            <td>283</td>
+           </tr>
+
+           <tr>
+            <td>Primary Magenta</td>
+            <td style="background-color: #F6276D;"></td>
+            <td>291</td>
+           </tr>
+
+           <tr>
+            <td>Magenta Deep</td>
+            <td style="background-color: #F63494;"></td>
+            <td>292</td>
+           </tr>
+
+           <tr>
+            <td>Dull Cosmos Deep</td>
+            <td style="background-color: #DA8FAE;"></td>
+            <td>293</td>
+           </tr>
+
+           <tr>
+            <td>Peach</td>
+            <td style="background-color: #dba7b1;"></td>
+            <td>357</td>
+           </tr>
+
+           <tr>
+            <td>Light Orange</td>
+            <td style="background-color: #bd7a3c;"></td>
+            <td>371</td>
+           </tr>
+
+           <tr>
+            <td>Floral White</td>
+            <td style="background-color: #c9ba8b;"></td>
+            <td>373</td>
+           </tr>
+
+           <tr>
+            <td>Blue Gray 1</td>
+            <td style="background-color: #F9F0EE;"></td>
+            <td>BG1</td>
+           </tr>
+
+           <tr>
+            <td>Blue Gray 3</td>
+            <td style="background-color: #CDCFDC;"></td>
+            <td>BG3</td>
+           </tr>
+
+           <tr>
+            <td>Blue Gray 5</td>
+            <td style="background-color: #9DACC4;"></td>
+            <td>BG5</td>
+           </tr>
+
+           <tr>
+            <td>Blue Gray 7</td>
+            <td style="background-color: #4B6983;"></td>
+            <td>BG7</td>
+           </tr>
+
+           <tr>
+            <td>Blue Gray 9</td>
+            <td style="background-color: #40546C;"></td>
+            <td>BG9</td>
+           </tr>
+
+           <tr>
+            <td>Green Gray 1</td>
+            <td style="background-color: #F4F3F3;"></td>
+            <td>GG1</td>
+           </tr>
+
+           <tr>
+            <td>Green Gray 3</td>
+            <td style="background-color: #c5c7c6;"></td>
+            <td>GG3</td>
+           </tr>
+
+           <tr>
+            <td>Green Grey 5</td>
+            <td style="background-color: #828b84;"></td>
+            <td>GG5</td>
+           </tr>
+
+           <tr>
+            <td>Green Grey 7</td>
+            <td style="background-color: #66727F;"></td>
+            <td>GG7</td>
+           </tr>
+
+           <tr>
+            <td>Green Grey 9</td>
+            <td style="background-color: #3e493d;"></td>
+            <td>GG9</td>
+           </tr>
+
+           <tr>
+            <td>Cool Grey 0.5</td>
+            <td style="background-color: #F2ECF0;"></td>
+            <td>CG0.5</td>
+           </tr>
+
+           <tr>
+            <td>Cool Grey 1</td>
+            <td style="background-color: #F5F1F2;"></td>
+            <td>CG1</td>
+           </tr>
+
+           <tr>
+            <td>Cool Grey 2</td>
+            <td style="background-color: #D9D8E0;"></td>
+            <td>CG2</td>
+           </tr>
+
+           <tr>
+            <td>Cool Grey 3</td>
+            <td style="background-color: #beb8c0;"></td>
+            <td>CG3</td>
+           </tr>
+
+           <tr>
+            <td>Cool Grey 4</td>
+            <td style="background-color: #C3C2D0;"></td>
+            <td>CG4</td>
+           </tr>
+
+           <tr>
+            <td>Cool Grey 5</td>
+            <td style="background-color: #9698AF;"></td>
+            <td>CG5</td>
+           </tr>
+
+           <tr>
+            <td>Cool Grey 6</td>
+            <td style="background-color: #7B8095;"></td>
+            <td>CG6</td>
+           </tr>
+
+           <tr>
+            <td>Cool Grey 7</td>
+            <td style="background-color: #757D93;"></td>
+            <td>CG7</td>
+           </tr>
+
+           <tr>
+            <td>Cool Grey 8</td>
+            <td style="background-color: #585B6D;"></td>
+            <td>CG8</td>
+           </tr>
+
+           <tr>
+            <td>Cool Grey 9</td>
+            <td style="background-color: #434751;"></td>
+            <td>CG9</td>
+           </tr>
+
+           <tr>
+            <td>Warm Grey 0.5</td>
+            <td style="background-color: #ebebeb;"></td>
+            <td>WG0.5</td>
+           </tr>
+
+            <tr>
+            <td>Warm Grey 1</td>
+            <td style="background-color: #d2d2d2;"></td>
+            <td>WG1</td>
+           </tr>
+
+           <tr>
+            <td>Warm Grey 2</td>
+            <td style="background-color: #b9b9b9;"></td>
+            <td>WG2</td>
+           </tr>
+
+           <tr>
+            <td>Warm Grey 3</td>
+            <td style="background-color: #adadad;"></td>
+            <td>WG3</td>
+           </tr>
+
+           <tr>
+            <td>Warm Grey 4</td>
+            <td style="background-color: #969696;"></td>
+            <td>WG4</td>
+           </tr>
+
+           <tr>
+            <td>Warm Grey 5</td>
+            <td style="background-color: #7a7a7a;"></td>
+            <td>WG5</td>
+           </tr>
+
+           <tr>
+            <td>Warm Grey 6</td>
+            <td style="background-color: #6c6c6c;"></td>
+            <td>WG6</td>
+           </tr>
+
+           <tr>
+            <td>Warm Grey 7</td>
+            <td style="background-color: #595959;"></td>
+            <td>WG7</td>
+           </tr>
+
+           <tr>
+            <td>Warm Grey 8</td>
+            <td style="background-color: #3c3c3c;"></td>
+            <td>WG8</td>
+           </tr>
+
+           <tr>
+            <td>Warm Grey 9</td>
+            <td style="background-color: #272727;"></td>
+            <td>WG9</td>
+           </tr>
+        </tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>

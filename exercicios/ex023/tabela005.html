@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício de Tabelas</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 450px;
+        }
+
+        caption {
+            font-size: 1.3em;
+            font-weight: bold;
+            padding: 8px;
+        }
+
+        tr.homens {
+            background-color: rgb(118, 221, 255);
+        }
+
+        tr.mulheres {
+            background-color: rgb(255, 176, 176);
+        }
+
+        td, th {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        td:hover {
+            background-color: rgb(149, 149, 149);
+            color: rgb(65, 65, 65);
+            transition: 0.65s;
+        }
+
+        col.cgenero {
+            background-color: firebrick;
+            color: maroon;
+        }
+
+        .cgenero {
+            background-color: firebrick;
+            color: maroon;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Exercício de Tabelas</h1>
+
+    <table>
+        <caption>Cadastro</caption>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Gênero</th>
+            <th scope="col">Idade</th>
+            <th scope="col">Profissão</th>
+        </tr>
+
+        <colgroup>
+            <col class="cnome">
+            <col class="cgenero">
+            <col class="cidade">
+            <col class="cprofis">
+        </colgroup>
+
+        <tr class="homens">
+            <td>João Almeida Teixeira</td>
+            <td class="cgenero">Masculino</td>
+            <td>31</td>
+            <td>Artista</td>
+        </tr>
+
+        <tr class="homens">
+            <td>Paulo Miranda da Costa</td>
+            <td class="cgenero">Masculino</td>
+            <td>29</td>
+            <td>Contador</td>
+        </tr>
+
+        <tr class="homens">
+            <td>Augusto Gonçalves de Paula</td>
+            <td class="cgenero">Masculino</td>
+            <td>34</td>
+            <td>Cabeleleiro</td>
+        </tr>
+
+        <tr class="homens">
+            <td>Luiz Ygor Fernandes De Ancântara</td>
+            <td class="cgenero">Masculino</td>
+            <td>36</td>
+            <td>Pedreiro</td>
+        </tr>
+
+        <tr class="mulheres">
+            <td>Daniela Ketlen Ruas dos Santos</td>
+            <td class="cgenero">Feminino</td>
+            <td>28</td>
+            <td>Manicure</td>
+        </tr>
+
+        <tr class="mulheres">
+            <td>Iolanda Abeu de Oliveira</td>
+            <td class="cgenero">Feminino</td>
+            <td>30</td>
+            <td>Enfermeira</td>
+        </tr>
+
+        <tr class="mulheres">
+            <td>Úrsula Farias Lima</td>
+            <td class="cgenero">Feminino</td>
+            <td>33</td>
+            <td>Escritora</td>
+        </tr>
+
+        <tr class="mulheres">
+            <td>Júlia Batista Dornelles</td>
+            <td class="cgenero">Feminino</td>
+            <td>26</td>
+            <td>Garçonete</td>
+        </tr>
+    </table>
+</body>
+</html>
