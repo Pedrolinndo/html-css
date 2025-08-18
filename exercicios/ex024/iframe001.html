@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudos de iframe</title>
+    <style>
+        iframe {
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <h1>Testando o uso de um iframe</h1>
-    <p>Acessando a <iframe src="https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal" frameborder="0"></iframe> pra aprender A Estudar</p>
+    <p>Acessando a <iframe src="https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal" frameborder="0" height="300px" width="600px">
+        <a href="https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal" target="_blank" scrolling="yes" >Site da Wikipédia</a>
+    </iframe> pra aprender A Estudar</p>
 
-    <p>O site do <iframe src="https://www.google.com.br" frameborder="0"></iframe> Também é TOP!</p>
+    <p>O Repositório do <iframe src="https://gustavoguanabara.github.io" frameborder="0">
+        <a href="https://gustavoguanabara.github.io" target="_blank">Repositório do Professor Gustavo Guanabara</a>
+    </iframe> Também é TOP!</p>
 </body>
 </html>
