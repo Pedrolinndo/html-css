@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Teste ChatGPT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #333;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 30px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #333;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        form input, form textarea, form select, form button {
+            display: block;
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        audio, video {
+            display: block;
+            margin-top: 10px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Bem-vindo ao Site de Teste ChatGPT</h1>
+    <p>Este site usa muitas tags HTML!</p>
+</header>
+
+<nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#lista">Lista</a>
+    <a href="#formulario">Formulário</a>
+    <a href="#midia">Mídia</a>
+</nav>
+
+<main>
+    <section id="sobre">
+        <h2>Seção Sobre</h2>
+        <p>Este site foi criado pelo ChatGPT como teste de HTML e CSS. Aqui usamos:</p>
+        <ul>
+            <li><strong>Cabeçalhos</strong> (h1, h2, h3)</li>
+            <li><em>Parágrafos</em> (p)</li>
+            <li><a href="#">Links</a></li>
+            <li>Listas ordenadas e não ordenadas</li>
+            <li>Imagens</li>
+            <li>Tabelas</li>
+            <li>Formulários</li>
+            <li>Botões</li>
+            <li>Áudio e vídeo</li>
+        </ul>
+        <h3>Imagem Exemplo:</h3>
+        <img src="https://comoescrever.com.br/wp-content/uploads/2023/07/quaisquer-ou-qualquer.jpg" alt="Imagem de Teste">
+    </section>
+
+    <section id="lista">
+        <h2>Seção de Listas</h2>
+        <p>Exemplo de lista ordenada:</p>
+        <ol>
+            <li>Primeiro item</li>
+            <li>Segundo item</li>
+            <li>Terceiro item</li>
+        </ol>
+    </section>
+
+    <section id="tabela">
+        <h2>Exemplo de Tabela</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>Cidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pedro</td>
+                    <td>25</td>
+                    <td>São Paulo</td>
+                </tr>
+                <tr>
+                    <td>Maria</td>
+                    <td>30</td>
+                    <td>Rio de Janeiro</td>
+                </tr>
+                <tr>
+                    <td>Emilly</td>
+                    <td>22</td>
+                    <td>Belo Horizonte</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="formulario">
+        <h2>Formulário de Contato</h2>
+        <form action="#" method="post">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Seu email">
+
+            <label for="mensagem">Mensagem:</label>
+            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Escreva aqui..."></textarea>
+
+            <label for="assunto">Assunto:</label>
+            <select id="assunto" name="assunto">
+                <option value="geral">Geral</option>
+                <option value="suporte">Suporte</option>
+                <option value="outro">Outro</option>
+            </select>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <section id="midia">
+        <h2>Áudio e Vídeo</h2>
+        <p>Exemplo de áudio:</p>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
+
+        <p>Exemplo de vídeo:</p>
+        <video controls>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+        </video>
+    </section>
+
+    <section>
+        <h2>Figura com legenda</h2>
+        <figure>
+            <img src="https://tse4.mm.bing.net/th/id/OIP.X1QeQuNTRNqhEFohk2KLeAHaDd?pid=Api&P=0&h=180" alt="Figura de Exemplo">
+            <figcaption>Legenda da figura de exemplo</figcaption>
+        </figure>
+    </section>
+</main>
+
+<footer>
+    <p>Site de teste criado pelo ChatGPT &copy; 2025</p>
+</footer>
+
+</body>
+</html>

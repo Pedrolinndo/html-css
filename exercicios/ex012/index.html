@@ -1,153 +1,26 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Site Perdido 🥲</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Comic Sans MS', sans-serif;
-      background: linear-gradient(to top left, #fce4ec, #f8bbd0);
-      color: #333;
-      text-align: center;
-      padding: 40px;
-    }
-
-    h1 {
-      font-size: 3em;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.2em;
-      max-width: 600px;
-      margin: auto;
-    }
-
-    .sad-img {
-      width: 200px;
-      margin: 30px auto;
-    }
-
-    canvas {
-      margin-top: 40px;
-      border: 2px dashed #999;
-      background: #fff;
-    }
-
-    .footer {
-      margin-top: 60px;
-      font-size: 0.9em;
-      color: #777;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeos com HTML5</title>
 </head>
 <body>
-  <h1>💔 Opa... deu ruim!</h1>
-  <p>Meu computador foi corrompido 😢<br> O HD resetou tudo e perdi todos os exercícios que eu ia colocar aqui...</p>
+    <h1>Inserindo vídeos hospedados localmente</h1>
+    <p>Este vídeo está hospedado no meu próprio servidor.</p>
 
-  <img class="sad-img" src="https://cdn-icons-png.flaticon.com/512/742/742751.png" alt="Carinha triste" />
+    <video width="560" poster="imagens/limoes-capa.png" controls autoplay loop>
+        <source src="midia/meu-video.mp4" type="video/mp4">
+        <source src="midia/meu-video.m4v" type="video/mp4">
+        <source src="midia/meu-video.webm" type="video/webm">
+        <source src="midia/meu-video.ogv" type="video/ogg">
+        <p>Seu navegador não tem compatibilidade com reprodução de vídeos.</p>
+    </video>
 
-  <p>Prometo tentar refazer tudinho em breve!<br> Enquanto isso... que tal jogar o joguinho do Dino? 🦖</p>
+    <h1>Inserindo vídeos do YouTube</h1>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/eF9Qoc6p_4Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-  <!-- Dino Game Canvas -->
-  <canvas id="game" width="600" height="200"></canvas>
-
-  <div class="footer">
-    © 2025 - Site em reconstrução por Pedro Miguel 💾🛠️
-  </div>
-
-  <!-- Mini Dino Game Script -->
-  <script>
-    const canvas = document.getElementById("game");
-    const ctx = canvas.getContext("2d");
-
-    let dino = { x: 50, y: 150, width: 40, height: 40, vy: 0, jumping: false };
-    let cactus = { x: 600, y: 160, width: 20, height: 40 };
-    let gravity = 1.5;
-    let score = 0;
-    let gameOver = false;
-
-    function drawDino() {
-      ctx.fillStyle = "#4caf50";
-      ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
-    }
-
-    function drawCactus() {
-      ctx.fillStyle = "#8d6e63";
-      ctx.fillRect(cactus.x, cactus.y, cactus.width, cactus.height);
-    }
-
-    function drawScore() {
-      ctx.fillStyle = "#555";
-      ctx.font = "20px Comic Sans MS";
-      ctx.fillText("Pontos: " + score, 10, 25);
-    }
-
-    function resetGame() {
-      dino.y = 150;
-      dino.vy = 0;
-      dino.jumping = false;
-      cactus.x = 600;
-      score = 0;
-      gameOver = false;
-    }
-
-    function update() {
-      if (gameOver) return;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      dino.y += dino.vy;
-      dino.vy += gravity;
-
-      if (dino.y >= 150) {
-        dino.y = 150;
-        dino.vy = 0;
-        dino.jumping = false;
-      }
-
-      cactus.x -= 6;
-      if (cactus.x < -20) {
-        cactus.x = 600 + Math.random() * 100;
-        score++;
-      }
-
-      // colisão
-      if (
-        dino.x < cactus.x + cactus.width &&
-        dino.x + dino.width > cactus.x &&
-        dino.y < cactus.y + cactus.height &&
-        dino.y + dino.height > cactus.y
-      ) {
-        gameOver = true;
-        ctx.fillStyle = "#e53935";
-        ctx.font = "30px Comic Sans MS";
-        ctx.fillText("Fim de Jogo 😢", 200, 100);
-        ctx.font = "20px Comic Sans MS";
-        ctx.fillText("Pressione qualquer tecla para recomeçar", 130, 130);
-        return;
-      }
-
-      drawDino();
-      drawCactus();
-      drawScore();
-
-      requestAnimationFrame(update);
-    }
-
-    document.addEventListener("keydown", () => {
-      if (gameOver) {
-        resetGame();
-        update();
-      } else if (!dino.jumping) {
-        dino.vy = -20;
-        dino.jumping = true;
-      }
-    });
-
-    update();
-  </script>
+    <h1>Inserindo vídeos do Vimeo</h1>
+    <iframe src="https://player.vimeo.com/video/197093965?color=ff9933&portrait=0" width="560" height="315" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 </body>
 </html>
