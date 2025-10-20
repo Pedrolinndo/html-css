@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xadrez daorinha</title>
+  <style>
+    body {
+      font-family: 'Verdana', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #1a1a1a;
+      color: #f0f0f0;
+    }
+
+    section {
+      padding: 40px 20px;
+      margin: 20px;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #2c2c2c, #3b3b3b);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    section h2 {
+      color: #ffa500;
+      font-size: 2em;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #ffa500;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    p, ul {
+      font-size: 1.1em;
+      line-height: 1.6em;
+    }
+
+    ul {
+      list-style-type: square;
+      padding-left: 20px;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+
+    /* CARROSSEL */
+    .carousel {
+      position: relative;
+      max-width: 100%;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 12px;
+      background-color: #222;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      min-width: 100%;
+      text-align: center;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .carousel-item img {
+      max-width: 300px;
+      border-radius: 12px;
+    }
+
+    .carousel-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .carousel-buttons button {
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: #fff;
+      font-size: 2em;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .carousel-buttons button:hover {
+      background: rgba(255,165,0,0.8);
+    }
+
+  </style>
+</head>
+<body>
+
+  <section id="como-jogar">
+    <h2>Como Jogar?</h2>
+    <p>O xadrez é um jogo de estratégia entre dois jogadores, cada um controlando 16 peças: um rei, uma rainha, duas torres, dois bispos, dois cavalos e oito peões. O objetivo é colocar o rei adversário em xeque-mate, ou seja, em posição de captura inevitável.</p>
+    <img src="https://tse1.mm.bing.net/th/id/OIP.X0zYwt5G6ZOc8YstkU4RHwHaFb?pid=Api&P=0&h=180" alt="Como jogar xadrez" width="700">
+  </section>
+
+  <section id="posicao-das-pecas">
+    <h2>Posição das Peças</h2>
+    <p>O tabuleiro possui 64 casas, alternando cores claras e escuras. Cada jogador organiza suas peças na primeira e segunda fileira. A segunda fileira é composta por peões, enquanto a primeira fileira tem, da esquerda para a direita: torre, cavalo, bispo, rainha, rei, bispo, cavalo, torre.</p>
+    <img src="https://tse3.mm.bing.net/th/id/OIP.vmIIBglFVdjp3qO9Fr14jQHaHa?pid=Api&P=0&h=180" alt="Posição inicial das peças">
+  </section>
+
+  <section id="tecnicas">
+    <h2>Técnicas de Xadrez</h2>
+    <ul>
+      <li>Controle do centro do tabuleiro</li>
+      <li>Desenvolvimento rápido das peças</li>
+      <li>Segurança do rei (roque)</li>
+      <li>Criação de ameaças duplas</li>
+      <li>Finalizações e estudo de finais clássicos</li>
+    </ul>
+  </section>
+
+  <section id="marcas">
+    <h2>Marcas de Xadrez</h2>
+    <div class="carousel">
+      <div class="carousel-track">
+        <div class="carousel-item">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.ybxri-nQk_n0FuTRavI9IAHaE9?pid=Api&P=0&h=180" alt="Dutati">
+          <p>Dutati</p>
+          <p>Preço: R$19,00</p>
+        </div>
+
+        <div class="carousel-item">
+          <img src="https://m.media-amazon.com/images/I/51N7HBhKJBL._SL500_.jpg" alt="Chess Magn">
+          <p>Chess Magnético DT1144</p>
+          <p>Preço: R$27,90</p>
+        </div>
+
+        <div class="carousel-item">
+          <img src="https://http2.mlstatic.com/D_NQ_NP_2X_740464-MLU79076638930_092024-F.webp" alt="Staunton">
+          <p>Staunton</p>
+          <p>Preço: R$99,99</p>
+        </div>
+      </div>
+      <div class="carousel-buttons">
+        <button id="prev">&#10094;</button>
+        <button id="next">&#10095;</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="historia-xadrez">
+    <h2>História do Xadrez</h2>
+    <p>O xadrez tem origem na Índia do século VI, chamado de Chaturanga, um jogo de estratégia militar. Ele se espalhou para a Pérsia, onde se tornou Shatranj, e posteriormente chegou à Europa durante a Idade Média, ganhando as regras modernas ao longo dos séculos XV e XVI. Tornou-se símbolo de inteligência, estratégia e competição internacional.</p>
+    <img src="https://tse3.mm.bing.net/th/id/OIP.QWjPVZqlgkDFqpTrP1fJQAHaFj?pid=Api&P=0&h=180" alt="História do xadrez">
+  </section>
+
+  <script>
+    // JS para o carrossel
+    const track = document.querySelector('.carousel-track');
+    const items = document.querySelectorAll('.carousel-item');
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
+    let index = 0;
+
+    function updateCarousel() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    nextButton.addEventListener('click', () => {
+      index = (index + 1) % items.length;
+      updateCarousel();
+    });
+
+    prevButton.addEventListener('click', () => {
+      index = (index - 1 + items.length) % items.length;
+      updateCarousel();
+    });
+  </script>
+
+</body>
+</html>
