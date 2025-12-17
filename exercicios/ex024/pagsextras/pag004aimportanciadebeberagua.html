@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Importância de Beber Água</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul: #1e90ff;
+      --azul-claro: #e6f3ff;
+      --branco: #ffffff;
+      --texto: #2c3e50;
+      --cinza: #7f8c8d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--azul-claro), var(--branco));
+      color: var(--texto);
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--azul), #00bfff);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      background: white;
+      padding: 35px;
+      margin-bottom: 35px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+    }
+
+    section h2 {
+      color: var(--azul);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    section p {
+      font-size: 1.05rem;
+      color: var(--texto);
+    }
+
+    ul {
+      margin-top: 15px;
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+      color: var(--cinza);
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: var(--cinza);
+      font-size: 0.95rem;
+    }
+
+    footer span {
+      color: var(--azul);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>A Importância de Beber Água 💧</h1>
+    <p>Um elemento simples, mas essencial para a vida</p>
+  </header>
+
+  <main>
+
+    <section id="introducao">
+      <h2>1. Introdução</h2>
+      <p>
+        A água é um dos recursos mais importantes do planeta e indispensável para a vida. 
+        Todos os seres vivos dependem dela para sobreviver, e no corpo humano ela desempenha 
+        funções vitais, desde a regulação da temperatura até o transporte de nutrientes.
+      </p>
+    </section>
+
+    <section id="composicao">
+      <h2>2. Composição da Água</h2>
+      <p>
+        A água é formada por dois átomos de hidrogênio (H) e um átomo de oxigênio (O), 
+        representados pela fórmula H₂O. Apesar de sua estrutura simples, ela possui propriedades 
+        únicas que a tornam essencial para reações químicas e processos biológicos.
+      </p>
+    </section>
+
+    <section id="importancia">
+      <h2>3. Importância da Água</h2>
+      <p>
+        Beber água regularmente é fundamental para o bom funcionamento do corpo humano. 
+        Ela ajuda a manter os órgãos saudáveis e garante o equilíbrio do organismo.
+      </p>
+      <ul>
+        <li>Regula a temperatura corporal</li>
+        <li>Auxilia na digestão e absorção de nutrientes</li>
+        <li>Transporta oxigênio e substâncias pelo corpo</li>
+        <li>Elimina toxinas através da urina e do suor</li>
+      </ul>
+    </section>
+
+    <section id="tipos">
+      <h2>4. Tipos de Água</h2>
+      <p>
+        Existem diferentes tipos de água próprios para consumo humano, cada um com suas características:
+      </p>
+      <ul>
+        <li>Água potável: própria para o consumo, tratada e segura</li>
+        <li>Água mineral: contém sais minerais naturais</li>
+        <li>Água filtrada: passa por filtros para remover impurezas</li>
+        <li>Água destilada: purificada por evaporação e condensação</li>
+      </ul>
+    </section>
+
+    <section id="sem-agua">
+      <h2>5. O que Aconteceria se Parássemos de Beber Água?</h2>
+      <p>
+        Sem a ingestão de água, o corpo humano rapidamente entraria em desequilíbrio. 
+        A desidratação pode causar cansaço, tontura, dores de cabeça e dificuldades de concentração. 
+        Em casos extremos, a falta de água pode comprometer órgãos vitais e colocar a vida em risco.
+      </p>
+    </section>
+
+    <section id="conclusao">
+      <h2>6. Conclusão</h2>
+      <p>
+        A água é essencial para a saúde, o bem-estar e a sobrevivência. 
+        Criar o hábito de beber água ao longo do dia é uma atitude simples que traz grandes benefícios. 
+        Cuidar da hidratação é cuidar da vida.
+      </p>
+    </section>
+
+    <section id="formulario">
+      <h2>Cadastro</h2>
+      <p>Preencha o formulário abaixo para se cadastrar:</p>
+
+      <h1>Cadastra ae man!</h1>
+      <form action="cadastro.php" method="post" style="margin-top:20px;">
+        <label for="nome">Nome</label><br>
+        <input type="text" id="nome" name="nome" required style="width:100%; padding:12px; margin:8px 0 16px; border-radius:10px; border:1px solid #ccc;">
+
+        <label for="senha">Senha</label><br>
+        <input type="password" id="senha" name="senha" required style="width:100%; padding:12px; margin:8px 0 20px; border-radius:10px; border:1px solid #ccc;">
+
+        <button type="submit" style="background:#1e90ff; color:white; border:none; padding:12px 30px; border-radius:25px; font-size:1rem; cursor:pointer; transition:0.3s;">
+          Enviar
+        </button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>🌊 Página educativa sobre a água | <span>Beber água é viver melhor</span></p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Pedra Virtual - V7 (Áudio)</title>
+    <style>
+        /* --- ESTILOS GERAIS (CSS não alterado, mas mantido para contexto) --- */
+        :root {
+            --bg-color: #87CEEB;
+            --stone-color: #808080;
+            --ui-bg: #fff;
+            --primary: #FFB6C1;
+            --room-width: 360px; 
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* --- TELA DO JOGO --- */
+        #game-container {
+            width: var(--room-width);
+            height: 640px;
+            background-color: var(--bg-color);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- BARRA DE STATUS e MONEY --- */
+        #top-bar {
+            background: rgba(255,255,255,0.9);
+            padding: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        .stat-box { display: flex; align-items: center; justify-content: space-between; }
+        progress { width: 60px; height: 10px; border-radius: 5px; }
+        progress[value]::-webkit-progress-value { transition: width 0.5s; }
+        #stat-fome::-webkit-progress-value { background-color: #ff9f43; }
+        #stat-energia::-webkit-progress-value { background-color: #54a0ff; }
+        #stat-limpeza::-webkit-progress-value { background-color: #00d2d3; }
+        #stat-felicidade::-webkit-progress-value { background-color: #ff9ff3; }
+
+        #money-display {
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background: #ffd32a;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            border: 2px solid #fff;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* --- CARROSSEL DE SALAS --- */
+        #scene {
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden; 
+            z-index: 5;
+        }
+
+        #room-carousel {
+            display: flex;
+            width: 400%; 
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+            position: relative;
+        }
+
+        .room {
+            width: var(--room-width);
+            flex-shrink: 0; 
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end; 
+            position: relative;
+        }
+
+        /* Estilos de fundo das salas */
+        #room-kitchen { background: #ffeaa7; }
+        #room-bedroom { background: #74b9ff; }
+        #room-bathroom { background: #81ecec; }
+        #room-games { background: #a29bfe; }
+        
+        /* --- PERSONAGEM PEDRA (FIXA) --- */
+        .rock {
+            position: absolute; 
+            top: 35%; 
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%); 
+            z-index: 15; 
+            
+            width: 150px;
+            height: 130px;
+            background: radial-gradient(circle at 30% 30%, #a9a9a9, #696969);
+            border-radius: 50% 50% 40% 40%;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background 0.2s;
+            cursor: pointer;
+        }
+        
+        /* CORREÇÃO: Todos os estados que alteram o transform precisam incluir o centralizador */
+        .rock:active { transform: translateX(-50%) translateY(-50%) scale(0.95); }
+        
+        /* Rosto e estados - Mantidos */
+        .eyes { display: flex; justify-content: space-between; width: 60px; position: absolute; top: 40px; left: 50%; transform: translateX(-50%); }
+        .eye { width: 15px; height: 15px; background: black; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff 2px, #000 3px); transition: all 0.2s; }
+        .mouth { width: 30px; height: 15px; border-bottom: 3px solid black; border-radius: 0 0 15px 15px; position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); transition: all 0.2s; background: transparent; }
+        
+        /* Efeitos visuais */
+        .rock.dirty::after { content: '💩'; font-size: 40px; position: absolute; top: -10px; right: -10px; opacity: 0.8; }
+        .rock.sleep .eye { height: 2px; border-radius: 0; background: #000; }
+        .rock.sleep::before { content: 'Zzz...'; position: absolute; top: -40px; right: -20px; font-weight: bold; animation: float 2s infinite; }
+        .rock.sour .mouth { width: 10px; height: 10px; border: 3px solid black; border-radius: 50%; bottom: 35px; background: #333; }
+        .rock.sour .eye { height: 2px; transform: rotate(20deg); }
+        .rock.dizzy .eye:nth-child(1) { transform: translateY(-5px); }
+        .rock.dizzy .eye:nth-child(2) { transform: translateY(5px); }
+        .rock.dizzy .mouth { width: 20px; height: 20px; border-radius: 50%; border: 3px solid black; border-top: 0; transform: translateX(-50%) rotate(10deg); }
+
+        /* Estado de FOGO */
+        .rock.fire { background: radial-gradient(circle at 30% 30%, #ff7675, #d63031); }
+        .rock.fire::before { content: '🔥'; font-size: 50px; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); animation: float 0.5s infinite alternate; }
+
+        /* Estado de MORTE */
+        .rock.dead { pointer-events: none; background: #555; overflow: hidden; 
+                      transform: translateX(-50%) translateY(-50%); } 
+        .rock.dead .eye { background: black; border-radius: 0; width: 15px; height: 3px; transform: rotate(45deg); }
+        .rock.dead .eye:nth-child(2) { transform: rotate(-45deg); }
+        .rock.dead::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.5) 10px, rgba(0,0,0,0.5) 12px); opacity: 0.6; }
+
+
+        /* --- UI de Controle (LOJA, CAMA, BANHO) --- */
+        .room-ui {
+            width: 100%;
+            height: 50%; 
+            flex-shrink: 0;
+            padding: 15px;
+            box-sizing: border-box;
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- LOJA --- */
+        .food-categories { display: flex; justify-content: center; gap: 5px; margin-bottom: 10px; flex-wrap: wrap; flex-shrink: 0; }
+        .cat-btn { padding: 5px 8px; border: 1px solid #ccc; border-radius: 10px; cursor: pointer; background: #eee; font-size: 12px; }
+        .cat-btn.active { background: #ff9f43; color: white; border-color: #e58e26; }
+        .scroll-container { flex-grow: 1; overflow-y: auto; padding: 5px; border-top: 1px solid #eee; margin-top: 5px; width: 100%; }
+        .food-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding-bottom: 20px; }
+        .food-item { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 8px 2px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-height: 80px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .food-item:active { background: #eee; transform: scale(0.98); }
+        .food-name { font-size: 11px; margin: 4px 0; font-weight: bold; color: #555; }
+        .food-price { color: green; font-weight: bold; font-size: 13px; }
+
+        /* Estilo da barra de rolagem */
+        .scroll-container::-webkit-scrollbar { width: 8px; }
+        .scroll-container::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+
+        /* --- QUARTO/BANHO/JOGOS --- */
+        #ui-bedroom, #ui-bathroom, #ui-games { justify-content: center; }
+        .game-menu-btn { background: #6c5ce7; color: white; padding: 15px; margin: 5px; border-radius: 10px; text-align: center; cursor: pointer; width: 80%; }
+
+
+        /* --- NAVEGAÇÃO HORIZONTAL --- */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 20;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .nav-arrow:hover { opacity: 1; }
+        #arrow-left { left: 10px; }
+        #arrow-right { right: 10px; }
+        .nav-arrow:disabled { opacity: 0.3; cursor: default; }
+        
+        /* Overlays */
+        .floater { position: absolute; pointer-events: none; animation: floatUp 1s forwards; font-weight: bold; z-index: 50; text-shadow: 1px 1px 0 #fff; }
+        @keyframes floatUp { 0% { transform: translateY(0); opacity: 1;} 100% { transform: translateY(-50px); opacity: 0;} }
+        
+        #death-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 999; display: none;
+            flex-direction: column; align-items: center; justify-content: center;
+            color: white; text-align: center;
+        }
+        #sleep-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); display: none; pointer-events: none; z-index: 10;
+        }
+        /* Minigames - mantidos como overlay global */
+        #minigame-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #2d3436; z-index: 100; display: none;
+            flex-direction: column; align-items: center; justify-content: center; color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <div id="top-bar">
+        <div class="stat-box">🍖 <progress id="stat-fome" value="100" max="100"></progress></div>
+        <div class="stat-box">⚡ <progress id="stat-energia" value="100" max="100"></progress></div>
+        <div class="stat-box">🧼 <progress id="stat-limpeza" value="100" max="100"></progress></div>
+        <div class="stat-box">😊 <progress id="stat-felicidade" value="100" max="100"></progress></div>
+    </div>
+    <div id="money-display">$ 200</div>
+
+    <button class="nav-arrow" id="arrow-left" onclick="navigateRoom(-1)">◀</button>
+    <button class="nav-arrow" id="arrow-right" onclick="navigateRoom(1)">▶</button>
+
+    <div id="scene">
+        
+        <div id="rock" class="rock" onclick="interactRock()">
+            <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+            <div class="mouth"></div>
+        </div>
+        
+        <div id="sleep-overlay"></div>
+
+        <div id="room-carousel">
+            
+            <div id="room-kitchen" class="room">
+                <div id="ui-kitchen" class="room-ui">
+                    <h3 style="margin-top:0;">🍽️ Cozinha (Loja)</h3>
+                    <div class="food-categories">
+                        <button class="cat-btn active" onclick="showFood('veg')">Vegetais</button>
+                        <button class="cat-btn" onclick="showFood('fruta')">Frutas</button>
+                        <button class="cat-btn" onclick="showFood('doce')">Doces</button>
+                        <button class="cat-btn" onclick="showFood('bebida')">Bebidas</button>
+                    </div>
+                    <div class="scroll-container">
+                        <div id="food-list" class="food-grid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="room-bedroom" class="room">
+                <div id="ui-bedroom" class="room-ui">
+                    <h3>🛌 Quarto</h3>
+                    <button style="padding: 15px 30px; font-size: 18px; border-radius: 10px; background: #2d3436; color: white; border: none; cursor: pointer;" onclick="toggleSleep()">💡 Apagar a Luz</button>
+                </div>
+            </div>
+            
+            <div id="room-bathroom" class="room">
+                <div id="ui-bathroom" class="room-ui">
+                    <h3>🚿 Banheiro</h3>
+                    <div style="font-size: 60px; cursor: pointer;" onclick="cleanRock()">🧽</div>
+                    <p>Limpar sujeira (Ganha $5)</p>
+                </div>
+            </div>
+
+            <div id="room-games" class="room">
+                <div id="ui-games" class="room-ui">
+                    <h3>🎮 Jogos</h3>
+                    <div class="scroll-container" style="overflow-y: visible;">
+                        <div class="game-menu-btn" onclick="startGame('clique')">👆 Jogo do Clique</div>
+                        <div class="game-menu-btn" onclick="startGame('desvio')">🧱 Jogo de Desviar</div>
+                        <div class="game-menu-btn" onclick="startGame('memoria')">🧠 Jogo da Memória</div>
+                    </div>
+                </div>
+            </div>
+
+        </div> </div> <div id="death-overlay">
+        <h1 style="font-size: 50px;">💀</h1>
+        <h2>A Pedra Rachou!</h2>
+        <p>Volte em:</p>
+        <h3 id="death-timer">00:00:00</h3>
+    </div>
+
+    <div id="minigame-container">
+        <span style="position:absolute; top:10px; right:10px; font-size:24px; cursor:pointer;" onclick="closeMinigame()">✖</span>
+        <h2 id="game-title">Minigame</h2>
+        <h3 id="game-score">Pontos: 0</h3>
+        <canvas id="minigame-canvas" width="300" height="400" style="background:#fff; border-radius:5px;"></canvas>
+        <div id="memory-grid" style="display:none; grid-template-columns: repeat(4, 1fr); gap: 5px;"></div>
+        <button id="start-game-btn" style="margin-top:20px; padding:10px; background:#00cec9; border:none; border-radius:5px; color:white; cursor:pointer;" onclick="runCurrentGame()">INICIAR</button>
+    </div>
+</div>
+
+<div id="audio-elements" style="display:none;">
+    <audio id="music-default" src="soundtrack/musicaneon.mp3" loop></audio>
+    <audio id="music-bedroom" src="soundtrack/soninho.mp3" loop></audio>
+    <audio id="music-bathroom" src="soundtrack/bolhas.mp3" loop></audio>
+    <audio id="music-click" src="soundtrack/click.mp3" loop></audio>
+    <audio id="music-dodge" src="soundtrack/desvio.mp3" loop></audio>
+    <audio id="music-memory" src="soundtrack/memoria.mp3" loop></audio>
+
+    <audio id="sound-eating" src="soundtrack/comeno.mp3"></audio>
+    <audio id="sound-snore" src="soundtrack/ronco.mp3" loop></audio>
+</div>
+
+
+<script>
+    /* --- LISTA DE ITENS (Sem alterações) --- */
+    const foods = {
+        veg: [
+            {name: 'Tomate', price: 2, hunger: 5, icon: '🍅'},
+            {name: 'Alface', price: 3, hunger: 6, icon: '🥬'},
+            {name: 'Cenoura', price: 2, hunger: 5, icon: '🥕'},
+            {name: 'Batata', price: 3, hunger: 7, icon: '🥔'},
+            {name: 'Brócolis', price: 4, hunger: 8, icon: '🥦'},
+            {name: 'Espinafre', price: 12, hunger: 100, type: 'full', icon: '🍃'},
+            {name: 'Milho', price: 3, hunger: 5, icon: '🌽'},
+            {name: 'Pepino', price: 2, hunger: 4, icon: '🥒'}
+        ],
+        fruta: [
+            {name: 'Maçã', price: 3, hunger: 5, icon: '🍎'},
+            {name: 'Banana', price: 2, hunger: 6, icon: '🍌'},
+            {name: 'Morango', price: 25, hunger: 45, icon: '🍓'},
+            {name: 'Limão', price: 10, hunger: 75, effect: 'sour', icon: '🍋'},
+            {name: 'Pimenta', price: 50, hunger: 80, effect: 'fire', icon: '🌶️'},
+            {name: 'Uva', price: 4, hunger: 4, icon: '🍇'},
+            {name: 'Melancia', price: 5, hunger: 10, icon: '🍉'},
+            {name: 'Abacaxi', price: 6, hunger: 8, icon: '🍍'}
+        ],
+        doce: [
+            {name: 'Biscoito', price: 4, hunger: 10, happy: 5, icon: '🍪'},
+            {name: 'Chocolate', price: 5, hunger: 12, happy: 8, icon: '🍫'},
+            {name: 'Bolo', price: 6, hunger: 15, happy: 10, icon: '🍰'},
+            {name: 'Bala', price: 1, hunger: 1, icon: '🍬'},
+            {name: 'Sorvete', price: 6, hunger: 8, happy: 12, icon: '🍦'},
+            {name: 'Pirulito', price: 3, hunger: 5, happy: 5, icon: '🍭'},
+            {name: 'Donut', price: 5, hunger: 10, happy: 8, icon: '🍩'}
+        ],
+        bebida: [
+            {name: 'Água', price: 2, hunger: 2, icon: '💧'},
+            {name: 'Suco', price: 4, hunger: 5, icon: '🧃'},
+            {name: 'Coca Cola', price: 45, energy: 45, icon: '🥤'},
+            {name: 'Café', price: 100, energy: 89, icon: '☕'},
+            {name: 'Cerveja', price: 1, energy: 70, dirty: 20, effect: 'dizzy', icon: '🍺'},
+            {name: 'Leite', price: 3, hunger: 5, icon: '🥛'},
+            {name: 'Chá', price: 3, energy: 10, icon: '🍵'},
+            {name: 'Veneno', price: 9999, effect: 'kill', icon: '☠️'}
+        ]
+    };
+
+    /* --- ESTADO & NAVEGAÇÃO --- */
+    let state = {
+        hunger: 100, energy: 100, clean: 100, happy: 100, money: 200, 
+        isSleeping: false, reviveTime: 0, 
+        currentRoomIndex: 0 
+    };
+    const roomNames = ['kitchen', 'bedroom', 'bathroom', 'games'];
+    // Mapeamento das salas para as músicas de fundo
+    const roomMusic = {
+        kitchen: 'music-default',
+        bedroom: 'music-bedroom',
+        bathroom: 'music-bathroom',
+        games: 'music-default' // Cozinha e Jogos usam a mesma música
+    };
+    let currentMusicId = '';
+
+    const saved = localStorage.getItem('rockPetSaveV7'); // Atualizado para V7
+    if(saved) state = JSON.parse(saved);
+
+    /* --- FUNÇÕES DE ÁUDIO --- */
+    function stopAllMusic() {
+        document.querySelectorAll('#audio-elements audio[loop]').forEach(audio => {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+    }
+
+    function playMusic(id) {
+        if (currentMusicId === id) return; // Não toca se já está tocando
+        stopAllMusic();
+        const audio = document.getElementById(id);
+        if (audio) {
+            audio.volume = 0.5; // Ajusta um pouco o volume da música de fundo
+            audio.play().catch(error => {
+                // Captura erro de autoplay bloqueado pelo navegador
+                console.warn("Autoplay bloqueado. A música iniciará após a primeira interação do usuário.");
+            });
+            currentMusicId = id;
+        }
+    }
+
+    function playSoundEffect(id) {
+        const audio = document.getElementById(id);
+        if (audio) {
+            audio.currentTime = 0; // Garante que o som comece do início
+            audio.volume = 1.0;
+            audio.play();
+        }
+    }
+
+    function navigateRoom(direction) {
+        let newIndex = state.currentRoomIndex + direction;
+        
+        if (newIndex >= 0 && newIndex < roomNames.length) {
+            state.currentRoomIndex = newIndex;
+            updateRoomDisplay();
+            updateArrowButtons();
+            
+            // Toca a música da nova sala
+            const roomName = roomNames[state.currentRoomIndex];
+            playMusic(roomMusic[roomName]);
+        }
+    }
+
+    function updateRoomDisplay() {
+        const carousel = document.getElementById('room-carousel');
+        const roomWidth = document.getElementById('game-container').offsetWidth;
+        
+        carousel.style.transform = `translateX(-${state.currentRoomIndex * roomWidth}px)`;
+    }
+
+    function updateArrowButtons() {
+        document.getElementById('arrow-left').disabled = state.currentRoomIndex === 0;
+        document.getElementById('arrow-right').disabled = state.currentRoomIndex === roomNames.length - 1;
+    }
+
+    /* --- LOOP --- */
+    setInterval(() => {
+        const rock = document.getElementById('rock');
+
+        if(Date.now() < state.reviveTime) { 
+            showDeathScreen(); 
+            return; 
+        } else if (rock.classList.contains('dead')) {
+            rock.classList.remove('dead');
+        }
+
+        if(!state.isSleeping) {
+            decreaseStat('hunger', 0.5); decreaseStat('clean', 0.3); decreaseStat('happy', 0.4); decreaseStat('energy', 0.2);
+            document.getElementById('sound-snore').pause();
+        } else {
+            increaseStat('energy', 2); decreaseStat('hunger', 0.2);
+            document.getElementById('sound-snore').play().catch(error => {});
+        }
+        updateUI(); saveGame();
+    }, 1000);
+
+    /* --- FUNÇÕES DE INTERAÇÃO --- */
+    function decreaseStat(stat, amount) { state[stat] = Math.max(0, state[stat] - amount); }
+    function increaseStat(stat, amount) { state[stat] = Math.min(100, state[stat] + amount); }
+
+    function updateUI() {
+        if(Date.now() < state.reviveTime) return;
+        document.getElementById('stat-fome').value = state.hunger;
+        document.getElementById('stat-energia').value = state.energy;
+        document.getElementById('stat-limpeza').value = state.clean;
+        document.getElementById('stat-felicidade').value = state.happy;
+        document.getElementById('money-display').innerText = '$ ' + Math.floor(state.money);
+
+        const rock = document.getElementById('rock');
+        const mouth = rock.querySelector('.mouth');
+        rock.classList.toggle('dirty', state.clean < 50);
+        rock.classList.toggle('sleep', state.isSleeping);
+
+        if(!rock.classList.contains('sour') && !rock.classList.contains('dizzy')) {
+            if(state.happy < 40 || state.hunger < 30) {
+                mouth.style.borderRadius = '15px 15px 0 0'; mouth.style.bottom = '25px';
+            } else {
+                mouth.style.borderRadius = '0 0 15px 15px'; mouth.style.bottom = '30px';
+            }
+        }
+    }
+
+    function saveGame() { localStorage.setItem('rockPetSaveV7', JSON.stringify(state)); }
+
+    function spawnFloater(text, color) {
+        const el = document.createElement('div');
+        el.className = 'floater'; el.innerText = text; el.style.color = color;
+        el.style.left = '50%'; 
+        el.style.top = '30%'; 
+        document.getElementById('scene').appendChild(el); 
+        setTimeout(() => el.remove(), 1000);
+    }
+
+    function interactRock() {
+        if(state.isSleeping || Date.now() < state.reviveTime) return;
+        increaseStat('happy', 5); spawnFloater('❤️', 'red');
+        const rock = document.getElementById('rock');
+        rock.style.transform = "translateX(-50%) translateY(-50%) scale(1.1)"; 
+        setTimeout(() => rock.style.transform = "translateX(-50%) translateY(-50%) scale(1)", 200);
+    }
+
+    function showDeathScreen() {
+        const overlay = document.getElementById('death-overlay');
+        const timer = document.getElementById('death-timer');
+        document.getElementById('rock').classList.add('dead');
+        overlay.style.display = 'flex';
+        
+        const diff = state.reviveTime - Date.now();
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        timer.innerText = `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    /* --- COZINHA (LOJA) --- */
+    function showFood(category) {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        if(event && event.target) event.target.classList.add('active');
+        
+        const list = document.getElementById('food-list');
+        list.innerHTML = '';
+        
+        foods[category].forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'food-item';
+            div.innerHTML = `<div style="font-size:24px">${item.icon}</div>
+                             <div class="food-name">${item.name}</div>
+                             <div class="food-price">$${item.price}</div>`;
+            div.onclick = () => buyFood(item);
+            list.appendChild(div);
+        });
+    }
+
+    function buyFood(item) {
+        if(Date.now() < state.reviveTime) return;
+        if(state.money >= item.price) {
+            if(item.hunger && state.hunger >= 100 && item.type !== 'full') { spawnFloater("Sem Fome!", "black"); return; }
+
+            state.money -= item.price;
+            playSoundEffect('sound-eating'); // Toca o som de comer
+            
+            if(item.effect === 'kill') { 
+                state.reviveTime = Date.now() + (5 * 60 * 60 * 1000); 
+                document.getElementById('rock').classList.add('dead');
+                showDeathScreen(); 
+                saveGame(); 
+                return; 
+            }
+
+            if(item.type === 'full') state.hunger = 100;
+            if(item.hunger) increaseStat('hunger', item.hunger);
+            if(item.energy) increaseStat('energy', item.energy);
+            if(item.happy) increaseStat('happy', item.happy);
+            if(item.dirty) decreaseStat('clean', item.dirty);
+
+            const rock = document.getElementById('rock');
+            rock.classList.remove('sour', 'fire', 'dizzy');
+
+            if(item.effect === 'sour') {
+                rock.classList.add('sour'); spawnFloater("😖 Azedo!", "#badc58"); setTimeout(() => rock.classList.remove('sour'), 3000);
+            } else if(item.effect === 'fire') {
+                rock.classList.add('fire'); spawnFloater("🔥 ARDENDO!", "orange"); setTimeout(() => rock.classList.remove('fire'), 4000);
+            } else if(item.effect === 'dizzy') {
+                rock.classList.add('dizzy'); spawnFloater("🥴 Tonta", "#74b9ff"); setTimeout(() => rock.classList.remove('dizzy'), 4000);
+            } else {
+                spawnFloater("Yummy!", "orange"); 
+                rock.style.transform = "translateX(-50%) translateY(-50%) scale(1.2)"; 
+                setTimeout(() => rock.style.transform = "translateX(-50%) translateY(-50%) scale(1)", 200);
+            }
+        } else { spawnFloater("Sem grana!", "red"); }
+    }
+
+    /* --- QUARTO/BANHO --- */
+    function toggleSleep() {
+        state.isSleeping = !state.isSleeping;
+        document.getElementById('sleep-overlay').style.display = state.isSleeping ? 'block' : 'none';
+        
+        // Músicas: Se estiver dormindo, toca o som de sono/ronco. Se acordar, volta a música da sala.
+        if (state.isSleeping) {
+            stopAllMusic();
+            document.getElementById('sound-snore').play().catch(error => {});
+        } else {
+            document.getElementById('sound-snore').pause();
+            const roomName = roomNames[state.currentRoomIndex];
+            playMusic(roomMusic[roomName]);
+        }
+        updateUI();
+    }
+
+    function cleanRock() {
+        if(state.clean >= 100) { spawnFloater("Limpo!", "blue"); return; }
+        increaseStat('clean', 20); 
+        state.money += 5; 
+        // Aqui você pode adicionar um som de banho, mas não foi especificado
+        spawnFloater("🫧 $5", "green");
+        const rock = document.getElementById('rock');
+        rock.style.filter = "brightness(1.2)"; setTimeout(() => rock.style.filter = "none", 300);
+    }
+
+    /* --- MINIGAMES (Com Músicas) --- */
+    let gameInterval = null, score = 0, currentGameType = '';
+    const canvas = document.getElementById('minigame-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function startGame(type) {
+        document.getElementById('minigame-container').style.display = 'flex';
+        score = 0; currentGameType = type;
+        document.getElementById('game-score').innerText = "Pontos: 0";
+        document.getElementById('start-game-btn').style.display = 'block';
+        document.getElementById('start-game-btn').onclick = () => {
+            document.getElementById('start-game-btn').style.display = 'none';
+            // Para a música de fundo e toca a música do jogo
+            stopAllMusic();
+            if(type === 'clique') { playMusic('music-click'); playClicker(); }
+            if(type === 'desvio') { playMusic('music-dodge'); playDodge(); }
+            if(type === 'memoria') { playMusic('music-memory'); playMemory(); }
+        };
+        ctx.clearRect(0,0,300,400);
+        document.getElementById('memory-grid').style.display = type === 'memoria' ? 'grid' : 'none';
+        canvas.style.display = type === 'memoria' ? 'none' : 'block';
+    }
+
+    function closeMinigame() {
+        clearInterval(gameInterval);
+        document.getElementById('minigame-container').style.display = 'none';
+        
+        // Volta a música da sala
+        const roomName = roomNames[state.currentRoomIndex];
+        playMusic(roomMusic[roomName]);
+
+        if(score > 0) { 
+            const e = Math.floor(score / 2); 
+            state.money += e; 
+            increaseStat('happy', Math.min(20, e)); 
+            alert(`Ganhou $${e} e +${Math.min(20, e)} Felicidade!`); 
+        }
+        canvas.onmousedown = null; 
+        canvas.onmousemove = null;
+    }
+
+    function playClicker() {
+        let timeLeft = 10, tx = 150, ty = 200;
+        canvas.onmousedown = (e) => {
+            const rect = canvas.getBoundingClientRect();
+            if(Math.hypot(e.clientX - rect.left - tx, e.clientY - rect.top - ty) < 20) {
+                score += 10; tx = Math.random()*260+20; ty = Math.random()*360+20;
+                document.getElementById('game-score').innerText = "Pontos: " + score;
+            }
+        };
+        gameInterval = setInterval(() => {
+            timeLeft -= 0.1; ctx.clearRect(0,0,300,400);
+            ctx.beginPath(); ctx.arc(tx, ty, 20, 0, Math.PI*2); ctx.fillStyle = '#ff7675'; ctx.fill();
+            ctx.fillStyle = 'black'; ctx.font = '20px Arial'; ctx.fillText("Tempo: " + Math.floor(timeLeft), 10, 30);
+            if(timeLeft <= 0) { closeMinigame(); }
+        }, 100);
+    }
+
+    function playDodge() {
+        let px = 150, obs = [];
+        canvas.onmousemove = (e) => px = e.clientX - canvas.getBoundingClientRect().left;
+        gameInterval = setInterval(() => {
+            ctx.clearRect(0,0,300,400);
+            ctx.fillStyle = '#808080'; ctx.beginPath(); ctx.arc(px, 350, 20, 0, Math.PI*2); ctx.fill();
+            if(Math.random()<0.05) obs.push({x:Math.random()*280, y:-20});
+            obs.forEach(o => {
+                o.y+=4; ctx.fillStyle='red'; ctx.fillRect(o.x,o.y,20,20);
+                if(Math.hypot(px-(o.x+10), 350-(o.y+10)) < 30) { closeMinigame(); }
+            });
+            score++; document.getElementById('game-score').innerText = score;
+        }, 30);
+    }
+
+    function playMemory() {
+        const icons = ['🍎','🍌','🍇','🍉','🎱','🥕'];
+        let cards = [...icons, ...icons].sort(() => Math.random()-0.5);
+        let sel = [], matches = 0;
+        const grid = document.getElementById('memory-grid'); grid.innerHTML = '';
+        cards.forEach(icon => {
+            const d = document.createElement('div');
+            d.style.cssText = "width:60px;height:60px;background:#0984e3;border-radius:5px;cursor:pointer;display:flex;justify-content:center;align-items:center;font-size:30px;";
+            d.onclick = () => {
+                if(sel.length < 2 && !d.classList.contains('f')) {
+                    d.style.background='#fff'; d.innerText=icon; d.classList.add('f'); sel.push(d);
+                    if(sel.length===2) {
+                        setTimeout(() => {
+                            if(sel[0].innerText===sel[1].innerText) { matches++; score+=20; document.getElementById('game-score').innerText=score; if(matches===6) closeMinigame(); }
+                            else { sel.forEach(c=>{c.style.background='#0984e3';c.innerText='';c.classList.remove('f')}); }
+                            sel=[];
+                        }, 600);
+                    }
+                }
+            };
+            grid.appendChild(d);
+        });
+    }
+
+    // Inicialização
+    updateRoomDisplay();
+    updateArrowButtons();
+    showFood('veg'); 
+    updateUI();
+    
+    // Inicia a música da primeira sala
+    playMusic(roomMusic[roomNames[state.currentRoomIndex]]);
+</script>
+</body>
+</html>
